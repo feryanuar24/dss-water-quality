@@ -1,337 +1,2648 @@
-import { Link, Head } from '@inertiajs/react';
+import { Link, Head } from "@inertiajs/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faMagnifyingGlassChart,
+    faPenNib,
+    faCode,
+    faVial,
+    faMessage,
+} from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    const [view, setView] = useState("teoritis");
+    const [scrolled, setScrolled] = useState(false);
+    const [nav, setNav] = useState("home");
+
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollY > 0) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", onScroll);
+
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
     return (
         <>
-            <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+            <Head title="SPKSungai" />
+
+            <div className="scroll-smooth">
+                {/* Header */}
+                <div
+                    className={`flex w-full justify-between items-center bg-blue-200 px-44 py-5 fixed z-50 ${
+                        scrolled ? "bg-opacity-80 shadow-lg" : null
+                    }`}
+                >
+                    <div className="font-black text-3xl text-gray-800 relative">
+                        <span className="bg-sky-500 top-2 -z-10 h-[6px] w-[100px] inline-block absolute rounded-[50%] my-0 mx-auto rotate-[160deg]"></span>
+                        SPKSungai
+                    </div>
+                    <div className="flex space-x-5 font-medium text-lg text-gray-800">
+                        <div
+                            className={`${
+                                nav == "home" ? "text-cyan-500" : null
+                            }`}
+                            onClick={() => setNav("home")}
+                        >
+                            <a href="#home">Home</a>
+                        </div>
+                        <div
+                            className={`${
+                                nav == "fitur" ? "text-cyan-500" : null
+                            }`}
+                            onClick={() => setNav("fitur")}
+                        >
+                            <a href="#fitur">Fitur</a>
+                        </div>
+                        <div
+                            className={`${
+                                nav == "tutorial" ? "text-cyan-500" : null
+                            }`}
+                            onClick={() => setNav("tutorial")}
+                        >
+                            <a href="#tutorial">Tutorial</a>
+                        </div>
+                        <div
+                            className={`${
+                                nav == "manfaat" ? "text-cyan-500" : null
+                            }`}
+                            onClick={() => setNav("manfaat")}
+                        >
+                            <a href="#manfaat">Manfaat</a>
+                        </div>
+                        <div
+                            className={`${
+                                nav == "kontak" ? "text-cyan-500" : null
+                            }`}
+                            onClick={() => setNav("kontak")}
+                        >
+                            <a href="#kontak">Kontak</a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Hero Section */}
+                <div
+                    className="w-full bg-blue-200 flex flex-col space-y-10 justify-center items-center h-screen"
+                    id="home"
+                >
+                    <div className="bg-sky-500 text-white rounded-lg py-2 px-4 font-medium text-lg">
+                        Get Started
+                    </div>
+                    <div className="font-black text-5xl w-1/2 text-center text-gray-800">
+                        SPK Kualitas Air Sungai Fuzzy Tsukamoto
+                    </div>
+                    <div className="font-medium text-gray-500 text-lg w-1/3 text-center">
+                        Sistem Pendukung Keputusan (SPK) ini membantu Anda
+                        menentukan kualitas air sungai dengan mudah dan akurat
+                        menggunakan metode Fuzzy Tsukamoto.
+                    </div>
                     {auth.user ? (
                         <Link
-                            href={route('dashboard')}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            href="/dashboard"
+                            className="bg-sky-500 text-white rounded-3xl py-3 px-6 font-black text-lg"
                         >
                             Dashboard
                         </Link>
                     ) : (
-                        <>
+                        <div className="space-x-5">
                             <Link
-                                href={route('login')}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Log in
-                            </Link>
-
-                            <Link
-                                href={route('register')}
-                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                href="/register"
+                                className="bg-sky-500 text-white rounded-3xl py-3 px-6 font-black text-lg"
                             >
                                 Register
                             </Link>
-                        </>
+                            <Link
+                                href="/login"
+                                className="bg-sky-500 text-white rounded-3xl py-3 px-6 font-black text-lg"
+                            >
+                                Login
+                            </Link>
+                        </div>
                     )}
                 </div>
 
-                <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                    <div className="flex justify-center">
+                {/* Image Section */}
+                <div className="w-full pb-20">
+                    <div>
+                        <div className="w-full relative bg-blue-200 h-80">
+                            <img
+                                src="/assets/image/hero-decision.png"
+                                alt="Pensive Businessman Making Decison"
+                                className="absolute w-11/12 left-12"
+                            />
+                        </div>
+                        <div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 1440 320"
+                            >
+                                <path
+                                    fill="#bfdbfe"
+                                    fillOpacity="1"
+                                    d="M0,96L60,122.7C120,149,240,203,360,213.3C480,224,600,192,720,197.3C840,203,960,245,1080,224C1200,203,1320,117,1380,74.7L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between mx-44 border-b-2 pb-20">
+                        <div className="w-32">
+                            <img
+                                src="/assets/image/laravel.png"
+                                alt="Laravel Logo"
+                            />
+                        </div>
+                        <div className="w-32">
+                            <img
+                                src="/assets/image/inertia.png"
+                                alt="Inertia Logo"
+                            />
+                        </div>
+                        <div className="w-32">
+                            <img
+                                src="/assets/image/react.png"
+                                alt="Raact Logo"
+                            />
+                        </div>
+                        <div className="w-32">
+                            <img
+                                src="/assets/image/mysql.png"
+                                alt="MySQL Logo"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Feature Section */}
+                <div className="w-full space-y-20 px-44" id="fitur">
+                    <div className="space-y-5 text-center">
+                        <div className="font-black text-5xl text-gray-800 px-20 relative">
+                            <span className="bg-sky-500 top-6 -z-10 h-[6px] w-[100px] inline-block absolute rounded-[50%] my-0 mx-auto rotate-[160deg]"></span>
+                            Jelajahi Berbagai Fitur Menakjubkan Kami
+                        </div>
+                        <div className="font-medium text-lg text-gray-500 px-40">
+                            Mendukung input data, analisis data Fuzzy Tsukamoto,
+                            dan menghasilkan informasi kualitas air.
+                        </div>
+                    </div>
+                    <div className="flex space-x-5 items-center">
+                        <div className="space-y-5">
+                            <div className="font-normal text-base text-gray-500 tracking-widest uppercase relative">
+                                <span className="bg-sky-500 h-full w-[60px] inline-block absolute opacity-[0.3]"></span>
+                                Dashboard
+                            </div>
+                            <div className="text-5xl font-black text-gray-800">
+                                Visualisasi Data Air Sungai dengan Fuzzy
+                                Tsukamoto
+                            </div>
+                            <div className="text-lg font-medium text-gray-500">
+                                Fitur-fitur penting seperti grafik fungsi
+                                keagotaan fuzzy, aturan fuzzy, dan visualisasi
+                                data memungkinkan Anda untuk memahami dan
+                                menganalisis data secara mendalam.
+                            </div>
+                        </div>
+                        <div className="w-[1200px]">
+                            <img
+                                src="/assets/image/dashboard.png"
+                                alt="Tampilan Halaman Dahboard"
+                            />
+                        </div>
+                    </div>
+                    <div className="flex space-x-5 items-center">
+                        <div className="w-[1200px]">
+                            <img
+                                src="/assets/image/manajemen-data.png"
+                                alt="Tampilan Halaman Manajemen Data"
+                            />
+                        </div>
+                        <div className="space-y-5">
+                            <div className="font-normal text-gray-500 tracking-widest uppercase relative">
+                                <span className="bg-sky-500 h-full w-[60px] inline-block absolute opacity-[0.3]"></span>
+                                Manajemen Data
+                            </div>
+                            <div className="text-5xl font-black text-gray-800">
+                                Pengambilan Keputusan Berbasis Data
+                            </div>
+                            <div className="text-lg font-medium text-gray-500">
+                                Masukkan data, dan biarkan sistem kami
+                                menganalisisnya untuk membantu Anda mengambil
+                                keputusan yang lebih terarah.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* I Do Section */}
+                <div className="relative">
+                    <div>
                         <svg
-                            viewBox="0 0 62 65"
-                            fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-16 w-auto bg-gray-100 dark:bg-gray-900"
+                            viewBox="0 0 1440 320"
                         >
                             <path
-                                d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z"
-                                fill="#FF2D20"
-                            />
+                                fill="#bfdbfe"
+                                fillOpacity="1"
+                                d="M0,128L120,106.7C240,85,480,43,720,42.7C960,43,1200,85,1320,106.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
+                            ></path>
                         </svg>
                     </div>
-
-                    <div className="mt-16">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                            <a
-                                href="https://laravel.com/docs"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
-                            >
-                                <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                                        Documentation
-                                    </h2>
-
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                        Laravel has wonderful documentation covering every aspect of the framework.
-                                        Whether you are a newcomer or have prior experience with Laravel, we recommend
-                                        reading our documentation from beginning to end.
-                                    </p>
+                    <div className="px-44 bg-blue-200 h-60 absolute top-32 space-y-10">
+                        <div className="text-center space-y-5 px-44">
+                            <div className="font-black text-5xl text-gray-800 relative">
+                                <span className="bg-sky-500 top-6 left-10 h-[6px] w-[100px] inline-block absolute rounded-[50%] my-0 mx-auto rotate-[160deg]"></span>
+                                <div className="z-10 absolute left-10">
+                                    Apa Yang Saya Kerjakan
                                 </div>
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="https://laracasts.com"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
-                            >
+                            </div>
+                            <div className="font-medium text-lg text-gray-500 pt-20">
+                                Sistem ini menggunakan metode Fuzzy Tsukamoto
+                                dan dikembangkan dengan model Waterfall untuk
+                                menghasilkan prediksi yang akurat.
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-10">
+                            <div className="flex space-x-5 border rounded-lg p-5 bg-white">
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                                        Laracasts
-                                    </h2>
-
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                        Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript
-                                        development. Check them out, see for yourself, and massively level up your
-                                        development skills in the process.
-                                    </p>
+                                    <FontAwesomeIcon
+                                        icon={faMagnifyingGlassChart}
+                                        className="text-blue-200 fa-2x"
+                                    />
                                 </div>
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                                    />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="https://laravel-news.com"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
-                            >
-                                <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
-                                            />
-                                        </svg>
+                                <div className="space-y-5">
+                                    <div className="font-black text-3xl text-gray-800">
+                                        Analisis
                                     </div>
-
-                                    <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                                        Laravel News
-                                    </h2>
-
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                        Laravel News is a community driven portal and newsletter aggregating all of the
-                                        latest and most important news in the Laravel ecosystem, including new package
-                                        releases and tutorials.
-                                    </p>
+                                    <div className="font-medium text-base text-gray-500">
+                                        Saya mengidentifikasi 7 parameter air
+                                        melalui studi literatur dan pengambilan
+                                        sampel air sungai di Karawang.
+                                    </div>
                                 </div>
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                                    />
-                                </svg>
-                            </a>
-
-                            <div className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                            </div>
+                            <div className="flex space-x-5 border rounded-lg p-5 bg-white">
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64"
-                                            />
-                                        </svg>
+                                    <FontAwesomeIcon
+                                        icon={faPenNib}
+                                        className="text-blue-200 fa-2x"
+                                    />
+                                </div>
+                                <div className="space-y-5">
+                                    <div className="font-black text-3xl text-gray-800">
+                                        Desain
                                     </div>
-
-                                    <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                                        Vibrant Ecosystem
-                                    </h2>
-
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                        Laravel's robust library of first-party tools and libraries, such as{' '}
-                                        <a
-                                            href="https://forge.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Forge
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://vapor.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Vapor
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://nova.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Nova
-                                        </a>
-                                        , and{' '}
-                                        <a
-                                            href="https://envoyer.io"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Envoyer
-                                        </a>{' '}
-                                        help you take your projects to the next level. Pair them with powerful open
-                                        source libraries like{' '}
-                                        <a
-                                            href="https://laravel.com/docs/billing"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Cashier
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://laravel.com/docs/dusk"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Dusk
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://laravel.com/docs/broadcasting"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Echo
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://laravel.com/docs/horizon"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Horizon
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://laravel.com/docs/sanctum"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Sanctum
-                                        </a>
-                                        ,{' '}
-                                        <a
-                                            href="https://laravel.com/docs/telescope"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                        >
-                                            Telescope
-                                        </a>
-                                        , and more.
-                                    </p>
+                                    <div className="font-medium text-base text-gray-500">
+                                        Saya merancang fitur dan tampilan, serta
+                                        mengembangkan komponen SPK untuk
+                                        membantu pengambilan keputusan terkait
+                                        kualitas air sungai.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex space-x-5 border rounded-lg p-5 bg-white">
+                                <div>
+                                    <FontAwesomeIcon
+                                        icon={faCode}
+                                        className="text-blue-200 fa-2x"
+                                    />
+                                </div>
+                                <div className="space-y-5">
+                                    <div className="font-black text-3xl text-gray-800">
+                                        Implementasi
+                                    </div>
+                                    <div className="font-medium text-base text-gray-500">
+                                        Saya menerjemahkan desain UI/UX menjadi
+                                        source code dan mengintegrasikan
+                                        analisis data ke dalam model SPK.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex space-x-5 border rounded-lg p-5 bg-white">
+                                <div>
+                                    <FontAwesomeIcon
+                                        icon={faVial}
+                                        className="text-blue-200 fa-2x"
+                                    />
+                                </div>
+                                <div className="space-y-5">
+                                    <div className="font-black text-3xl text-gray-800">
+                                        Testing
+                                    </div>
+                                    <div className="font-medium text-base text-gray-500">
+                                        Saya melakukan pengujian fungsional dan
+                                        non-fungsional pada sistem yang
+                                        diimplementasikan dengan data
+                                        sesungguhnya dan mendapatkan hasil
+                                        memuaskan.
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-                        <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-start">
-                            <div className="flex items-center gap-4">
+                {/* Tutorial Section */}
+                <div className="pt-[500px] relative">
+                    <div>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 1440 320"
+                        >
+                            <path
+                                fill="#bfdbfe"
+                                fillOpacity="1"
+                                d="M0,128L120,106.7C240,85,480,43,720,42.7C960,43,1200,85,1320,106.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div className="flex flex-col justify-center items-center space-y-10 bg-blue-200 w-full absolute -bottom-96">
+                        <div className="font-black text-gray-800 text-5xl relative w-full">
+                            <span className="bg-sky-500 bottom-5 left-[35%] h-[6px] w-[100px] inline-block absolute rounded-[50%] my-0 mx-auto rotate-[160deg]"></span>
+                            <div className="absolute left-[35%] bottom-0">
+                                Cara Penggunaan
+                            </div>
+                        </div>
+                        <div className="px-[35%] text-center font-medium text-gray-500 text-lg">
+                            Simak video berikut untuk mempelajari cara
+                            menggunakan aplikasi ini.
+                        </div>
+                        <div>
+                            <iframe
+                                width="560"
+                                height="315"
+                                src="https://www.youtube.com/embed/-FYlkIVOUA8?si=yf97rL_LuITXoPg5"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="rounded-lg"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className="bg-blue-200 w-full h-[500px]"
+                    id="tutorial"
+                ></div>
+
+                {/* Benefits Section */}
+                <div className="h-screen space-y-10" id="manfaat">
+                    <div className="text-center space-y-5">
+                        <div className="text-5xl font-black text-gray-800">
+                            Manfaat dan Kegunaan
+                        </div>
+                        <div className="text-lg font-medium text-gray-500 w-96 mx-auto">
+                            Pengembangan aplikasi ini memberikan berbagai
+                            manfaat, antara lain.
+                        </div>
+                    </div>
+                    <div className="px-44">
+                        <div className="flex justify-around items-center text-3xl font-bold border-t-2 border-l-2 border-r-2 rounded-t-lg">
+                            <div
+                                className={`cursor-pointer w-full text-center ${
+                                    view === "teoritis"
+                                        ? "text-sky-500 border-b-2 border-sky-500"
+                                        : "text-gray-500"
+                                }`}
+                                onClick={() => setView("teoritis")}
+                            >
+                                Teoritis
+                            </div>
+                            <div
+                                className={`cursor-pointer w-full text-center ${
+                                    view === "praktis"
+                                        ? "text-sky-500 border-b-2 border-sky-500"
+                                        : "text-gray-500"
+                                }`}
+                                onClick={() => setView("praktis")}
+                            >
+                                Praktis
+                            </div>
+                        </div>
+                        <div className="h-80 border-2 rounded-b-lg p-5 text-lg text-gray-500 font-medium">
+                            {view === "teoritis" ? (
+                                <div>
+                                    <ul className="list-disc list-inside">
+                                        <li>
+                                            Berperan dalam meningkatkan
+                                            pengetahuan dan pemahaman mengenai
+                                            penerapan metode fuzzy Tsukamoto
+                                            dalam Sistem Pendukung Keputusan
+                                            (SPK) untuk mengevaluasi kualitas
+                                            air sungai khususnya untuk daerah
+                                            Karawang.
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) : (
+                                <ol className="list-disc list-inside space-y-3">
+                                    <li>
+                                        Membantu pembangunan Sistem Pendukung
+                                        Keputusan (SPK) yang efisien untuk
+                                        pemantauan kualitas air sungai, sehingga
+                                        menjadi alat berharga bagi pengelola
+                                        lingkungan.
+                                    </li>
+                                    <li>
+                                        Menjadi dasar untuk pengelolaan sumber
+                                        daya air yang lebih optimal di wilayah
+                                        Karawang dengan memanfaatkan teknologi
+                                        dan kecerdasan buatan.
+                                    </li>
+                                    <li>
+                                        Berpotensi mengurangi risiko kesehatan
+                                        masyarakat dan dampak negatif lingkungan
+                                        melalui pemantauan dan manajemen yang
+                                        lebih efektif terhadap kualitas air
+                                        sungai.
+                                    </li>
+                                    <li>
+                                        Menyediakan informasi akurat dan cepat
+                                        kepada pihak terkait, seperti
+                                        pemerintah, peneliti, dan masyarakat,
+                                        untuk pengambilan keputusan yang lebih
+                                        tepat terkait kualitas air sungai.
+                                    </li>
+                                </ol>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Contact Section */}
+                <div className="h-screen flex items-center" id="kontak">
+                    <div className="flex border-2 mx-44 p-10 rounded-lg space-x-5">
+                        <div className="space-y-5">
+                            <div className="text-3xl font-black text-gray-800">
+                                Mari Terhubung
+                            </div>
+                            <div className="text-lg font-medium text-gray-500">
+                                Untuk informasi lebih lanjut tentang aplikasi
+                                ini, silakan hubungi saya. Anda juga dapat
+                                memberikan saran dan tanggapan terkait bug atau
+                                pengembangan aplikasi ini
+                            </div>
+                            <div>
                                 <a
-                                    href="https://github.com/sponsors/taylorotwell"
-                                    className="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                    className="bg-cyan-500 rounded-lg w-max text-lg text-white font-bold px-5 py-3"
+                                    href="https://wa.me/6283813479771"
+                                    target="_blank"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        className="-mt-px me-1 w-5 h-5 stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                                        />
-                                    </svg>
-                                    Sponsor
+                                    Hubungi Saya
                                 </a>
                             </div>
                         </div>
+                        <div className="relative">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                xmlns:svgjs="http://svgjs.dev/svgjs"
+                                width="400"
+                                preserveAspectRatio="none"
+                                viewBox="0 0 1200 630"
+                            >
+                                <g mask='url("#SvgjsMask1304")' fill="none">
+                                    <path
+                                        d="M-93.2 560.77L-93.2 560.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-93.2 560.77L-70.61 711.46"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-93.2 560.77L65.98 560.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L-70.61 711.46"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L-106.88 789.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L38.39 653.16"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L65.98 560.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L111.01 853.3"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-70.61 711.46L225.83 805.89"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-106.88 789.36L-106.88 789.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-106.88 789.36L38.39 653.16"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-106.88 789.36L111.01 853.3"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-106.88 789.36L-93.2 560.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M65.98 560.11L65.98 560.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M65.98 560.11L38.39 653.16"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M65.98 560.11L221.77 540.78"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M65.98 560.11L261.39 666.41"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M65.98 560.11L-106.88 789.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M38.39 653.16L38.39 653.16"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M111.01 853.3L111.01 853.3"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M111.01 853.3L225.83 805.89"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M111.01 853.3L38.39 653.16"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.77 540.78L221.77 540.78"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.77 540.78L261.39 666.41"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.77 540.78L369.27 558.74"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.77 540.78L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M261.39 666.41L261.39 666.41"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M261.39 666.41L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M261.39 666.41L225.83 805.89"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M261.39 666.41L369.27 558.74"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M225.83 805.89L225.83 805.89"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M225.83 805.89L409.83 861.28"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L386.45 358.87"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L530.64 390.95"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L369.27 558.74"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L221.77 540.78"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L549.4 551.75"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L679.62 386.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M386.45 358.87L644.25 503.65"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M369.27 558.74L369.27 558.74"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M369.27 558.74L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M369.27 558.74L549.4 551.75"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M369.27 558.74L544.37 692.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M393.56 667.36L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M409.83 861.28L409.83 861.28"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M409.83 861.28L548.81 804.1"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M409.83 861.28L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M530.64 390.95L530.64 390.95"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M530.64 390.95L679.62 386.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M530.64 390.95L644.25 503.65"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M530.64 390.95L549.4 551.75"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M549.4 551.75L549.4 551.75"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M549.4 551.75L644.25 503.65"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M549.4 551.75L544.37 692.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M549.4 551.75L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M544.37 692.99L544.37 692.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M544.37 692.99L548.81 804.1"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M544.37 692.99L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M544.37 692.99L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M548.81 804.1L548.81 804.1"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M548.81 804.1L659.19 855.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M548.81 804.1L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M548.81 804.1L393.56 667.36"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M698.05 104.08L698.05 104.08"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M698.05 104.08L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M698.05 104.08L859.22 85.26"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M698.05 104.08L790.44 -105.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M698.05 104.08L679.62 386.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M679.62 386.64L679.62 386.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M679.62 386.64L644.25 503.65"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M644.25 503.65L644.25 503.65"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M644.25 503.65L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M658.8 666.43L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L659.19 855.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L829.77 856.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L658.8 666.43"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L544.37 692.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L833.01 704.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M659.19 855.14L409.83 861.28"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M790.44 -105.77L790.44 -105.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M790.44 -105.77L961.45 -87.95"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M790.44 -105.77L859.22 85.26"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.22 85.26L859.22 85.26"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.22 85.26L983.08 57.9"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.22 85.26L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M812.1 212.14L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M812.1 212.14L820.06 367.32"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M820.06 367.32L820.06 367.32"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M820.06 367.32L957.55 343.13"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M820.06 367.32L679.62 386.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M820.06 367.32L857.25 530.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M820.06 367.32L959.95 260.27"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M857.25 530.11L857.25 530.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M857.25 530.11L972.41 545.67"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M857.25 530.11L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M857.25 530.11L833.01 704.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M833.01 704.77L833.01 704.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M833.01 704.77L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M833.01 704.77L829.77 856.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M833.01 704.77L955.63 825.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M829.77 856.99L829.77 856.99"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M829.77 856.99L955.63 825.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L961.45 -87.95"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L983.08 57.9"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L1137.61 -79.44"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L859.22 85.26"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L1142.05 97.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.45 -87.95L698.05 104.08"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M983.08 57.9L983.08 57.9"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M983.08 57.9L1142.05 97.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M983.08 57.9L959.95 260.27"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M983.08 57.9L1137.61 -79.44"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M983.08 57.9L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.95 260.27L959.95 260.27"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.95 260.27L957.55 343.13"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.95 260.27L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M957.55 343.13L957.55 343.13"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M957.55 343.13L1111.53 371.01"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M957.55 343.13L812.1 212.14"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L972.41 545.67"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L1143.93 551.85"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L1115.06 649.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L957.55 343.13"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M972.41 545.67L833.01 704.77"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M939.09 669.07L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M955.63 825.11L955.63 825.11"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M955.63 825.11L1091.44 815.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M955.63 825.11L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1137.61 -79.44L1137.61 -79.44"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1137.61 -79.44L1289.89 -40.46"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1142.05 97.76L1142.05 97.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1142.05 97.76L1137.61 -79.44"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1142.05 97.76L1289.89 -40.46"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1142.05 97.76L1304.31 234.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1142.05 97.76L959.95 260.27"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1111.53 371.01L1111.53 371.01"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1143.93 551.85L1143.93 551.85"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1143.93 551.85L1115.06 649.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1143.93 551.85L1254.9 535.72"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1143.93 551.85L1111.53 371.01"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1143.93 551.85L1306.3 667.05"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1115.06 649.84L1115.06 649.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1115.06 649.84L1091.44 815.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1115.06 649.84L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1115.06 649.84L1254.9 535.72"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1115.06 649.84L1306.3 667.05"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1091.44 815.84L1091.44 815.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1091.44 815.84L939.09 669.07"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1091.44 815.84L1308.24 822.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1091.44 815.84L1306.3 667.05"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1289.89 -40.46L1289.89 -40.46"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1289.89 -40.46L1304.31 234.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1304.31 234.64L1304.31 234.64"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1304.31 234.64L1298.06 375.45"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1304.31 234.64L1111.53 371.01"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1298.06 375.45L1298.06 375.45"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1298.06 375.45L1254.9 535.72"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1298.06 375.45L1111.53 371.01"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1298.06 375.45L1143.93 551.85"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1254.9 535.72L1254.9 535.72"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1254.9 535.72L1306.3 667.05"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1306.3 667.05L1306.3 667.05"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1306.3 667.05L1308.24 822.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1308.24 822.76L1308.24 822.76"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1308.24 822.76L1115.06 649.84"
+                                        stroke="rgba(107, 114, 128, 1)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <circle
+                                        r="5"
+                                        cx="-93.2"
+                                        cy="560.77"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="-70.61"
+                                        cy="711.46"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="-106.88"
+                                        cy="789.36"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="65.98"
+                                        cy="560.11"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="38.39"
+                                        cy="653.16"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="111.01"
+                                        cy="853.3"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="221.77"
+                                        cy="540.78"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="261.39"
+                                        cy="666.41"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="225.83"
+                                        cy="805.89"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="386.45"
+                                        cy="358.87"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="369.27"
+                                        cy="558.74"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="393.56"
+                                        cy="667.36"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="409.83"
+                                        cy="861.28"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="530.64"
+                                        cy="390.95"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="549.4"
+                                        cy="551.75"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="544.37"
+                                        cy="692.99"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="548.81"
+                                        cy="804.1"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="698.05"
+                                        cy="104.08"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="679.62"
+                                        cy="386.64"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="644.25"
+                                        cy="503.65"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="658.8"
+                                        cy="666.43"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="659.19"
+                                        cy="855.14"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="790.44"
+                                        cy="-105.77"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="859.22"
+                                        cy="85.26"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="812.1"
+                                        cy="212.14"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="820.06"
+                                        cy="367.32"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="857.25"
+                                        cy="530.11"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="833.01"
+                                        cy="704.77"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="829.77"
+                                        cy="856.99"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="961.45"
+                                        cy="-87.95"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="983.08"
+                                        cy="57.9"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="959.95"
+                                        cy="260.27"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="957.55"
+                                        cy="343.13"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="972.41"
+                                        cy="545.67"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="939.09"
+                                        cy="669.07"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="955.63"
+                                        cy="825.11"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1137.61"
+                                        cy="-79.44"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1142.05"
+                                        cy="97.76"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1111.53"
+                                        cy="371.01"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1143.93"
+                                        cy="551.85"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1115.06"
+                                        cy="649.84"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1091.44"
+                                        cy="815.84"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1289.89"
+                                        cy="-40.46"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1304.31"
+                                        cy="234.64"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1298.06"
+                                        cy="375.45"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1254.9"
+                                        cy="535.72"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1306.3"
+                                        cy="667.05"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1308.24"
+                                        cy="822.76"
+                                        fill="rgba(107, 114, 128, 1)"
+                                    ></circle>
+                                    <path
+                                        d="M221.92 810.72L221.92 810.72"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.92 810.72L108.92 857.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.92 810.72L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.92 810.72L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M221.92 810.72L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M853.85 357.57L853.85 357.57"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M853.85 357.57L831.46 261.18"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M853.85 357.57L970.5 411.98"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M853.85 357.57L959.87 510.99"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L815.8 552.71"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L859.28 659.88"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L687.72 534.52"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L959.87 510.99"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M815.8 552.71L853.85 357.57"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.28 659.88L859.28 659.88"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.28 659.88L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M859.28 659.88L854.97 807.79"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L1162.06 -101.68"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L1300.14 -97.38"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L1123.75 46.69"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L965.23 -85.34"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L1281.9 83.73"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L961.03 71.3"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1162.06 -101.68L1253.61 219.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L1112.73 367.1"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L1245.67 354.49"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L970.5 411.98"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L987.03 207.03"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1112.73 367.1L1253.61 219.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1300.14 -97.38L1300.14 -97.38"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1300.14 -97.38L1281.9 83.73"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1300.14 -97.38L1123.75 46.69"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L-71.36 647.58"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L-77.47 848.94"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L108.92 857.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L226.78 557.62"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L221.92 810.72"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-71.36 647.58L387.58 492.15"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L-77.47 848.94"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L108.92 857.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L221.92 810.72"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L226.78 557.62"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M-77.47 848.94L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M108.92 857.53L108.92 857.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M108.92 857.53L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M108.92 857.53L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M226.78 557.62L226.78 557.62"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M226.78 557.62L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M226.78 557.62L387.58 492.15"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M226.78 557.62L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M219.95 646.77L219.95 646.77"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M219.95 646.77L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M387.58 492.15L387.58 492.15"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M387.58 492.15L508.1 551.97"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M387.58 492.15L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M412 691.2L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M412 691.2L492.44 682.97"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M412 691.2L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M384.41 836L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M384.41 836L499.64 860.6"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M508.1 551.97L508.1 551.97"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M508.1 551.97L492.44 682.97"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M508.1 551.97L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M508.1 551.97L687.72 534.52"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M508.1 551.97L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M492.44 682.97L492.44 682.97"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M492.44 682.97L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M492.44 682.97L499.64 860.6"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M492.44 682.97L384.41 836"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M499.64 860.6L499.64 860.6"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M499.64 860.6L412 691.2"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M499.64 860.6L689.5 805.39"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M499.64 860.6L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M687.72 534.52L687.72 534.52"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M687.72 534.52L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M687.72 534.52L859.28 659.88"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M651.89 680.96L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M651.89 680.96L689.5 805.39"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M651.89 680.96L815.8 552.71"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M689.5 805.39L689.5 805.39"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M689.5 805.39L854.97 807.79"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M689.5 805.39L859.28 659.88"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M831.46 261.18L831.46 261.18"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M831.46 261.18L987.03 207.03"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M831.46 261.18L970.5 411.98"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M831.46 261.18L961.03 71.3"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M831.46 261.18L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M854.97 807.79L854.97 807.79"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M854.97 807.79L971.22 820.22"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M854.97 807.79L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M854.97 807.79L651.89 680.96"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M854.97 807.79L815.8 552.71"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M965.23 -85.34L965.23 -85.34"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M965.23 -85.34L961.03 71.3"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.03 71.3L961.03 71.3"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M961.03 71.3L987.03 207.03"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M987.03 207.03L987.03 207.03"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M987.03 207.03L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M987.03 207.03L853.85 357.57"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M970.5 411.98L970.5 411.98"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M970.5 411.98L959.87 510.99"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M970.5 411.98L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.87 510.99L959.87 510.99"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.87 510.99L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.87 510.99L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M959.87 510.99L859.28 659.88"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M956.18 644.37L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M956.18 644.37L971.22 820.22"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M971.22 820.22L971.22 820.22"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M971.22 820.22L1133.91 797.52"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1123.75 46.69L1123.75 46.69"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1123.75 46.69L1281.9 83.73"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1094.4 245.53L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1105.5 506.21L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1105.5 506.21L1136.29 646.41"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1136.29 646.41L1136.29 646.41"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1136.29 646.41L1257.73 701.43"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1133.91 797.52L1133.91 797.52"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1133.91 797.52L1136.29 646.41"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1133.91 797.52L1257.73 701.43"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1133.91 797.52L956.18 644.37"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1133.91 797.52L854.97 807.79"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1281.9 83.73L1281.9 83.73"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1281.9 83.73L1253.61 219.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1253.61 219.53L1253.61 219.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1253.61 219.53L1245.67 354.49"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1253.61 219.53L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1245.67 354.49L1245.67 354.49"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1245.67 354.49L1094.4 245.53"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1245.67 354.49L1278.41 550.62"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1245.67 354.49L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1278.41 550.62L1278.41 550.62"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1278.41 550.62L1257.73 701.43"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1278.41 550.62L1136.29 646.41"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1278.41 550.62L1105.5 506.21"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1278.41 550.62L1112.73 367.1"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <path
+                                        d="M1257.73 701.43L1257.73 701.43"
+                                        stroke="hsl(215, 27.9%, 21.9%)"
+                                        strokeWidth="1.5"
+                                    ></path>
+                                    <circle
+                                        r="25"
+                                        cx="221.92"
+                                        cy="810.72"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="853.85"
+                                        cy="357.57"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="815.8"
+                                        cy="552.71"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="859.28"
+                                        cy="659.88"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="1162.06"
+                                        cy="-101.68"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="1112.73"
+                                        cy="367.1"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="25"
+                                        cx="1300.14"
+                                        cy="-97.38"
+                                        fill='url("#SvgjsRadialGradient1305")'
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="-71.36"
+                                        cy="647.58"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="-77.47"
+                                        cy="848.94"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="108.92"
+                                        cy="857.53"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="226.78"
+                                        cy="557.62"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="219.95"
+                                        cy="646.77"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="387.58"
+                                        cy="492.15"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="412"
+                                        cy="691.2"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="384.41"
+                                        cy="836"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="508.1"
+                                        cy="551.97"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="492.44"
+                                        cy="682.97"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="499.64"
+                                        cy="860.6"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="687.72"
+                                        cy="534.52"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="651.89"
+                                        cy="680.96"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="689.5"
+                                        cy="805.39"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="831.46"
+                                        cy="261.18"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="854.97"
+                                        cy="807.79"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="965.23"
+                                        cy="-85.34"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="961.03"
+                                        cy="71.3"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="987.03"
+                                        cy="207.03"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="970.5"
+                                        cy="411.98"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="959.87"
+                                        cy="510.99"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="956.18"
+                                        cy="644.37"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="971.22"
+                                        cy="820.22"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1123.75"
+                                        cy="46.69"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1094.4"
+                                        cy="245.53"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1105.5"
+                                        cy="506.21"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1136.29"
+                                        cy="646.41"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1133.91"
+                                        cy="797.52"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1281.9"
+                                        cy="83.73"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1253.61"
+                                        cy="219.53"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1245.67"
+                                        cy="354.49"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1278.41"
+                                        cy="550.62"
+                                        fill="#8f949b"
+                                    ></circle>
+                                    <circle
+                                        r="5"
+                                        cx="1257.73"
+                                        cy="701.43"
+                                        fill="#8f949b"
+                                    ></circle>
+                                </g>
+                                <defs>
+                                    <mask id="SvgjsMask1304">
+                                        <rect
+                                            width="1200"
+                                            height="630"
+                                            fill="#ffffff"
+                                        ></rect>
+                                    </mask>
+                                    <radialGradient id="SvgjsRadialGradient1305">
+                                        <stop
+                                            stopColor="#ffffff"
+                                            offset="0.1"
+                                        ></stop>
+                                        <stop
+                                            stopColor="rgba(31, 41, 55, 1)"
+                                            offset="0.2"
+                                        ></stop>
+                                        <stop
+                                            stopColor="rgba(31, 41, 55, 0)"
+                                            offset="1"
+                                        ></stop>
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+                            <FontAwesomeIcon
+                                icon={faMessage}
+                                className="fa-8x text-cyan-500 bg-white border p-3 rounded-lg shadow-lg absolute left-[40%] top-10"
+                            />
+                        </div>
+                    </div>
+                </div>
 
-                        <div className="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
+                {/* Footer */}
+                <div className="bg-blue-200 px-44 py-10 flex justify-between">
+                    <div className="font-bold text-gray-800">
+                        <div>
+                            Sistem Pendukung Keputusan Penentuan Kualitas Air
+                            Sungai
+                        </div>
+                        <div>© 2024 Fery Anuar</div>
+                    </div>
+                    <div className="font-bold text-gray-800">
+                        <div>
+                            Alamat Email:{" "}
+                            <a
+                                href="mailto:feryanuar24@gmail.com"
+                                target="_blank"
+                                className="hover:text-cyan-500"
+                            >
+                                feryanuar24@gmail.com
+                            </a>
+                        </div>
+                        <div>
+                            Nomor Telepon:{" "}
+                            <a
+                                href="tel:+6283813479771"
+                                target="_blank"
+                                className="hover:text-cyan-500"
+                            >
+                                +6283813479771
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <style>{`
-                .bg-dots-darker {
-                    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
-                }
-                @media (prefers-color-scheme: dark) {
-                    .dark\\:bg-dots-lighter {
-                        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
-                    }
-                }
-            `}</style>
         </>
     );
 }

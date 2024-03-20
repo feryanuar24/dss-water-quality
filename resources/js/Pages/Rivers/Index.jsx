@@ -15,9 +15,11 @@ export default function Index({ auth, rivers }) {
                     Manajemen Data Sungai (Parameter dan Kualitas Air)
                 </div>
 
-                <PrimaryButton>
-                    <Link href={route("rivers.create")}>Buat</Link>
-                </PrimaryButton>
+                <div>
+                    <Link href={route("rivers.create")}>
+                        <PrimaryButton>Buat</PrimaryButton>
+                    </Link>
+                </div>
 
                 <div>
                     <table className="table-auto w-full divide-y divide-gray-200 rounded-lg overflow-hidden">

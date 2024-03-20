@@ -75,9 +75,17 @@ export default function Edit({ auth, river }) {
     const [derajatKeanggotaanSuhuBuruk, setDerajatKeanggotaanSuhuBuruk] =
         useState();
 
+    const [aPredikat1, setAPredikat1] = useState();
+    const [aPredikat2, setAPredikat2] = useState();
+    const [aPredikat3, setAPredikat3] = useState();
+    const [aPredikat4, setAPredikat4] = useState();
+    const [aPredikat5, setAPredikat5] = useState();
+    const [aPredikat6, setAPredikat6] = useState();
+    const [aPredikat7, setAPredikat7] = useState();
+
     const [z1, setZ1] = useState();
-    const [z2a, setZ2a] = useState();
-    const [z2b, setZ2b] = useState();
+    const [z2A, setZ2A] = useState();
+    const [z2B, setZ2B] = useState();
     const [z3, setZ3] = useState();
     const [z4, setZ4] = useState();
     const [z5, setZ5] = useState();
@@ -88,176 +96,181 @@ export default function Edit({ auth, river }) {
         // Fuzzifikasi
 
         // EC (Electrical Conductivity)
-        if (data.ec <= 90) {
+        if (data.ec <= 200) {
             setDerajatKeanggotaanECBaik(1);
             setDerajatKeanggotaanECSedang(0);
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec > 90 && data.ec < 110) {
-            setDerajatKeanggotaanECBaik((110 - data.ec) / (110 - 90));
-            setDerajatKeanggotaanECSedang((data.ec - 90) / (110 - 90));
+        } else if (data.ec > 200 && data.ec < 850) {
+            setDerajatKeanggotaanECBaik((850 - data.ec) / (850 - 200));
+            setDerajatKeanggotaanECSedang((data.ec - 200) / (850 - 200));
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec >= 110 && data.ec <= 240) {
+        } else if (data.ec == 850) {
             setDerajatKeanggotaanECBaik(0);
             setDerajatKeanggotaanECSedang(1);
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec > 240 && data.ec < 260) {
+        } else if (data.ec > 850 && data.ec < 1500) {
             setDerajatKeanggotaanECBaik(0);
-            setDerajatKeanggotaanECSedang(260 - data.ec) / (260 - 240);
-            setDerajatKeanggotaanECBuruk(data.ec - 240) / (260 - 240);
-        } else if (data.ec >= 260) {
+            setDerajatKeanggotaanECSedang(1500 - data.ec) / (1500 - 850);
+            setDerajatKeanggotaanECBuruk(data.ec - 850) / (1500 - 850);
+        } else if (data.ec >= 1500) {
             setDerajatKeanggotaanECBaik(0);
             setDerajatKeanggotaanECSedang(0);
             setDerajatKeanggotaanECBuruk(1);
         }
 
         // TDS (Total Dissolved Solids)
-        if (data.tds <= 400) {
+        if (data.tds <= 300) {
             setDerajatKeanggotaanTDSBaik(1);
             setDerajatKeanggotaanTDSSedang(0);
             setDerajatKeanggotaanTDSBuruk(0);
-        } else if (data.tds > 400 && data.tds < 600) {
-            setDerajatKeanggotaanTDSBaik((600 - data.tds) / (600 - 400));
-            setDerajatKeanggotaanTDSSedang((data.tds - 400) / (600 - 400));
+        } else if (data.tds > 300 && data.tds < 750) {
+            setDerajatKeanggotaanTDSBaik((750 - data.tds) / (750 - 300));
+            setDerajatKeanggotaanTDSSedang((data.tds - 300) / (750 - 300));
             setDerajatKeanggotaanTDSBuruk(0);
-        } else if (data.tds >= 600 && data.tds <= 900) {
+        } else if (data.tds == 750) {
             setDerajatKeanggotaanTDSBaik(0);
             setDerajatKeanggotaanTDSSedang(1);
             setDerajatKeanggotaanTDSBuruk(0);
-        } else if (data.tds > 900 && data.tds < 1100) {
+        } else if (data.tds > 750 && data.tds < 1200) {
             setDerajatKeanggotaanTDSBaik(0);
-            setDerajatKeanggotaanTDSSedang((1100 - data.tds) / (1100 - 900));
-            setDerajatKeanggotaanTDSBuruk((data.tds - 900) / (1100 - 900));
-        } else if (data.tds >= 1100) {
+            setDerajatKeanggotaanTDSSedang((1200 - data.tds) / (1200 - 750));
+            setDerajatKeanggotaanTDSBuruk((data.tds - 750) / (1200 - 750));
+        } else if (data.tds >= 1200) {
             setDerajatKeanggotaanTDSBaik(0);
             setDerajatKeanggotaanTDSSedang(0);
             setDerajatKeanggotaanTDSBuruk(1);
         }
 
         // Salinitas
-        if (data.salinitas <= 0.4) {
+        if (data.salinitas <= 0.5) {
             setDerajatKeanggotaanSalinitasBaik(1);
             setDerajatKeanggotaanSalinitasSedang(0);
             setDerajatKeanggotaanSalinitasBuruk(0);
-        } else if (data.salinitas > 0.4 && data.salinitas < 0.6) {
+        } else if (data.salinitas > 0.5 && data.salinitas < 0.75) {
             setDerajatKeanggotaanSalinitasBaik(
-                (0.6 - data.salinitas) / (0.6 - 0.4)
+                (0.75 - data.salinitas) / (0.75 - 0.5)
             );
             setDerajatKeanggotaanSalinitasSedang(
-                (data.salinitas - 0.4) / (0.6 - 0.4)
+                (data.salinitas - 0.5) / (0.75 - 0.5)
             );
             setDerajatKeanggotaanSalinitasBuruk(0);
-        } else if (data.salinitas >= 0.6 && data.salinitas <= 0.9) {
+        } else if (data.salinitas == 0.75) {
             setDerajatKeanggotaanSalinitasBaik(0);
             setDerajatKeanggotaanSalinitasSedang(1);
             setDerajatKeanggotaanSalinitasBuruk(0);
-        } else if (data.salinitas > 0.9 && data.salinitas < 1.1) {
+        } else if (data.salinitas > 0.75 && data.salinitas < 1) {
             setDerajatKeanggotaanSalinitasBaik(0);
-            setDerajatKeanggotaanECSedang((1.1 - data.salinitas) / (1.1 - 0.9));
-            setDerajatKeanggotaanECBuruk((data.salinitas - 0.9) / (1.1 - 0.9));
-        } else if (data.salinitas >= 1.1) {
+            setDerajatKeanggotaanECSedang((1 - data.salinitas) / (1 - 0.75));
+            setDerajatKeanggotaanECBuruk((data.salinitas - 0.75) / (1 - 0.75));
+        } else if (data.salinitas >= 1) {
             setDerajatKeanggotaanSalinitasBaik(0);
             setDerajatKeanggotaanSalinitasSedang(0);
             setDerajatKeanggotaanSalinitasBuruk(1);
         }
 
         // pH
-        if (data.ph >= 6.6 && data.ph <= 8.4) {
+        if (data.ph == 7) {
             setDerajatKeanggotaanPHBaik(1);
             setDerajatKeanggotaanPHSedang(0);
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 6.4 && data.ph < 6.6) {
-            setDerajatKeanggotaanPHBaik((6.6 - data.ph) / (6.6 - 6.4));
-            setDerajatKeanggotaanPHSedang((data.ph - 6.4) / (6.6 - 6.4));
+        } else if (data.ph > 7 && data.ph < 7.5) {
+            setDerajatKeanggotaanPHBaik((7.5 - data.ph) / (7.5 - 7));
+            setDerajatKeanggotaanPHSedang((data.ph - 7) / (7.5 - 7));
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 8.4 && data.ph < 8.6) {
-            setDerajatKeanggotaanPHBaik((8.6 - data.ph) / (8.6 - 8.4));
-            setDerajatKeanggotaanPHSedang((data.ph - 8.4) / (8.6 - 8.4));
+        } else if (data.ph > 6.5 && data.ph < 7) {
+            setDerajatKeanggotaanPHBaik((6.5 - data.ph) / (6.5 - 7));
+            setDerajatKeanggotaanPHSedang((data.ph - 7) / (6.5 - 7));
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (
-            (data.ph >= 6.1 && data.ph >= 6.4) ||
-            (data.ph >= 8.6 && data.ph >= 8.9)
-        ) {
+        } else if (data.ph == 6.5 || data.ph == 7.5) {
             setDerajatKeanggotaanPHBaik(0);
             setDerajatKeanggotaanPHSedang(1);
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 5.9 && data.ph < 6.1) {
+        } else if (data.ph > 7.5 && data.ph < 8) {
             setDerajatKeanggotaanPHBaik(0);
-            setDerajatKeanggotaanPHSedang((6.1 - data.ph) / (6.1 - 5.9));
-            setDerajatKeanggotaanPHBuruk((data.ph - 5.9) / (6.1 - 5.9));
-        } else if (data.ph > 8.9 && data.ph < 9.1) {
+            setDerajatKeanggotaanPHSedang((8 - data.ph) / (8 - 7.5));
+            setDerajatKeanggotaanPHBuruk((data.ph - 7.5) / (8 - 7.5));
+        } else if (data.ph > 6 && data.ph < 6.5) {
             setDerajatKeanggotaanPHBaik(0);
-            setDerajatKeanggotaanPHSedang((9.1 - data.ph) / (9.1 - 8.9));
-            setDerajatKeanggotaanPHBuruk((data.ph - 9.1) / (9.1 - 8.9));
-        } else if (data.ph <= 5.9 && data.ph >= 9.1) {
+            setDerajatKeanggotaanPHSedang((6 - data.ph) / (6 - 6.5));
+            setDerajatKeanggotaanPHBuruk((data.ph - 6.5) / (6 - 6.5));
+        } else if (data.ph <= 6 || data.ph >= 8) {
             setDerajatKeanggotaanPHBaik(0);
             setDerajatKeanggotaanPHSedang(0);
             setDerajatKeanggotaanPHBuruk(1);
         }
 
         // ORP (Oxidation Reduction Potential)
-        if (data.orp >= 210) {
+        if (data.orp == 0) {
             setDerajatKeanggotaanORPBaik(1);
             setDerajatKeanggotaanORPSedang(0);
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp > 190 && data.orp < 210) {
-            setDerajatKeanggotaanORPBaik((210 - data.orp) / (210 - 190));
-            setDerajatKeanggotaanORPSedang((data.orp - 190) / (210 - 190));
+        } else if (data.orp > 0 && data.orp < 50) {
+            setDerajatKeanggotaanORPBaik((50 - data.orp) / (50 - 0));
+            setDerajatKeanggotaanORPSedang((data.orp - 0) / (50 - 0));
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp >= 110 && data.orp <= 190) {
+        } else if (data.orp > -50 && data.orp < 0) {
+            setDerajatKeanggotaanORPBaik((data.orp - -50) / (0 - -50));
+            setDerajatKeanggotaanORPSedang((0 - data.orp) / (0 - -50));
+            setDerajatKeanggotaanORPBuruk(0);
+        } else if (data.orp == -50 || data.orp == 50) {
             setDerajatKeanggotaanORPBaik(0);
             setDerajatKeanggotaanORPSedang(1);
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp > 90 && data.orp < 110) {
+        } else if (data.orp > 50 && data.orp < 100) {
             setDerajatKeanggotaanORPBaik(0);
-            setDerajatKeanggotaanORPSedang((110 - data.orp) / (110 - 90));
-            setDerajatKeanggotaanORPBuruk((data.orp - 90) / (110 - 90));
-        } else if (data.orp <= 90) {
+            setDerajatKeanggotaanORPSedang((100 - data.orp) / (100 - 50));
+            setDerajatKeanggotaanORPBuruk((data.orp - 50) / (100 - 50));
+        } else if (data.orp > -100 && data.orp < -50) {
+            setDerajatKeanggotaanORPBaik(0);
+            setDerajatKeanggotaanORPSedang((data.orp - -100) / (-50 - -100));
+            setDerajatKeanggotaanORPBuruk((-50 - data.orp) / (-50 - -100));
+        } else if (data.orp <= -100 || data.orp >= 100) {
             setDerajatKeanggotaanORPBaik(0);
             setDerajatKeanggotaanORPSedang(0);
             setDerajatKeanggotaanORPBuruk(1);
         }
 
         // SG (Specific Gravity)
-        if (data.sg >= 1000 && data.sg <= 1004) {
+        if (data.sg <= 1020) {
             setDerajatKeanggotaanSGBaik(1);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1004 && data.sg < 1006) {
-            setDerajatKeanggotaanSGBaik((1006 - data.sg) / (1006 - 1004));
-            setDerajatKeanggotaanSGSedang((data.sg - 1004) / (1006 - 1004));
+        } else if (data.sg > 1020 && data.sg < 1023) {
+            setDerajatKeanggotaanSGBaik((1023 - data.sg) / (1023 - 1020));
+            setDerajatKeanggotaanSGSedang((data.sg - 1020) / (1023 - 1020));
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg >= 1006 && data.sg <= 1014) {
+        } else if (data.sg == 1023) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(1);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1014 && data.sg < 1016) {
+        } else if (data.sg > 1023 && data.sg < 1025) {
             setDerajatKeanggotaanSGBaik(0);
-            setDerajatKeanggotaanSGSedang((1016 - data.sg) / (1016 - 1014));
-            setDerajatKeanggotaanSGBuruk((data.sg - 1014) / (1016 - 1014));
-        } else if (data.sg >= 1016) {
+            setDerajatKeanggotaanSGSedang((1025 - data.sg) / (1025 - 1023));
+            setDerajatKeanggotaanSGBuruk((data.sg - 1023) / (1025 - 1023));
+        } else if (data.sg >= 1025) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(1);
         }
 
         // Suhu
-        if (data.suhu >= 25 && data.suhu <= 29) {
+        if (data.suhu <= 23) {
             setDerajatKeanggotaanSuhuBaik(1);
             setDerajatKeanggotaanSuhuSedang(0);
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu > 29 && data.suhu < 31) {
-            setDerajatKeanggotaanSuhuBaik((31 - data.suhu) / (31 - 29));
-            setDerajatKeanggotaanSuhuSedang((data.suhu - 29) / (31 - 29));
+        } else if (data.suhu > 23 && data.suhu < 27) {
+            setDerajatKeanggotaanSuhuBaik((27 - data.suhu) / (27 - 23));
+            setDerajatKeanggotaanSuhuSedang((data.suhu - 23) / (27 - 23));
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu >= 31 && data.suhu <= 34) {
+        } else if (data.suhu == 27) {
             setDerajatKeanggotaanSuhuBaik(0);
             setDerajatKeanggotaanSuhuSedang(1);
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu > 34 && data.suhu < 36) {
+        } else if (data.suhu > 27 && data.suhu < 31) {
             setDerajatKeanggotaanSuhuBaik(0);
-            setDerajatKeanggotaanSuhuSedang((36 - data.suhu) / (36 - 34));
-            setDerajatKeanggotaanSuhuBuruk((data.suhu - 34) / (36 - 34));
-        } else if (data.suhu >= 36) {
+            setDerajatKeanggotaanSuhuSedang((31 - data.suhu) / (31 - 27));
+            setDerajatKeanggotaanSuhuBuruk((data.suhu - 27) / (31 - 27));
+        } else if (data.suhu >= 31) {
             setDerajatKeanggotaanSuhuBaik(0);
             setDerajatKeanggotaanSuhuSedang(0);
             setDerajatKeanggotaanSuhuBuruk(1);
@@ -266,141 +279,154 @@ export default function Edit({ auth, river }) {
         // Inferensi
 
         // Rule 1: Kualitas Air Baik
-        const aPredikat1 = Math.min(
-            derajatKeanggotaanECBaik,
-            derajatKeanggotaanTDSBaik,
-            derajatKeanggotaanSalinitasBaik,
-            derajatKeanggotaanPHBaik,
-            derajatKeanggotaanORPBaik,
-            derajatKeanggotaanSGBaik,
-            derajatKeanggotaanSuhuBaik
+        setAPredikat1(
+            Math.min(
+                derajatKeanggotaanECBaik,
+                derajatKeanggotaanTDSBaik,
+                derajatKeanggotaanSalinitasBaik,
+                derajatKeanggotaanPHBaik,
+                derajatKeanggotaanORPBaik,
+                derajatKeanggotaanSGBaik,
+                derajatKeanggotaanSuhuBaik
+            )
         );
         if (aPredikat1 == 0) {
-            setZ1(50);
+            setZ1(55);
         } else {
-            setZ1(aPredikat1 * (100 - 50) + 50);
+            setZ1(aPredikat1 * (80 - 55) + 55);
         }
 
         // Rule 2: Kualitas Air Sedang
-        const aPredikat2 = Math.min(
-            derajatKeanggotaanECSedang,
-            derajatKeanggotaanTDSSedang,
-            derajatKeanggotaanSalinitasSedang,
-            derajatKeanggotaanPHSedang,
-            derajatKeanggotaanORPSedang,
-            derajatKeanggotaanSGSedang,
-            derajatKeanggotaanSuhuSedang
+        setAPredikat2(
+            Math.min(
+                derajatKeanggotaanECSedang,
+                derajatKeanggotaanTDSSedang,
+                derajatKeanggotaanSalinitasSedang,
+                derajatKeanggotaanPHSedang,
+                derajatKeanggotaanORPSedang,
+                derajatKeanggotaanSGSedang,
+                derajatKeanggotaanSuhuSedang
+            )
         );
         if (aPredikat2 == 0) {
-            setZ2a(80);
-            setZ2b(30);
+            setZ2A(80);
+            setZ2B(30);
         } else {
-            setZ2a(80 - aPredikat2 * (80 - 50));
-            setZ2b(aPredikat2 * (50 - 30) + 30);
+            setZ2A(80 - aPredikat2 * (80 - 55));
+            setZ2B(aPredikat2 * (55 - 30) + 30);
         }
 
         // Rule 3: Kualitas Air Buruk
-        const aPredikat3 = Math.min(
-            derajatKeanggotaanECBuruk,
-            derajatKeanggotaanTDSBuruk,
-            derajatKeanggotaanSalinitasBuruk,
-            derajatKeanggotaanPHBuruk,
-            derajatKeanggotaanORPBuruk,
-            derajatKeanggotaanSGBuruk,
-            derajatKeanggotaanSuhuBuruk
+        setAPredikat3(
+            Math.min(
+                derajatKeanggotaanECBuruk,
+                derajatKeanggotaanTDSBuruk,
+                derajatKeanggotaanSalinitasBuruk,
+                derajatKeanggotaanPHBuruk,
+                derajatKeanggotaanORPBuruk,
+                derajatKeanggotaanSGBuruk,
+                derajatKeanggotaanSuhuBuruk
+            )
         );
         if (aPredikat3 == 0) {
-            setZ3(50);
+            setZ3(55);
         } else {
-            setZ3(50 - aPredikat3 * (50 - 0));
+            setZ3(55 - aPredikat3 * (55 - 30));
         }
 
         // Rule 4: Kimia Baik, Fisik Sedang
-        const aPredikat4 = Math.min(
-            derajatKeanggotaanECBaik,
-            derajatKeanggotaanTDSBaik,
-            derajatKeanggotaanSalinitasBaik,
-            derajatKeanggotaanPHBaik,
-            derajatKeanggotaanORPBaik,
-            derajatKeanggotaanSGSedang,
-            derajatKeanggotaanSuhuSedang
+        setAPredikat4(
+            Math.min(
+                derajatKeanggotaanECBaik,
+                derajatKeanggotaanTDSBaik,
+                derajatKeanggotaanSalinitasBaik,
+                derajatKeanggotaanPHBaik,
+                derajatKeanggotaanORPBaik,
+                derajatKeanggotaanSGSedang,
+                derajatKeanggotaanSuhuSedang
+            )
         );
         if (aPredikat4 == 0) {
             setZ4(80);
         } else {
-            setZ4(80 - aPredikat4 * (80 - 50));
+            setZ4(80 - aPredikat4 * (80 - 55));
         }
 
         // Rule 5: Kimia Sedang, Fisik Baik
-        const aPredikat5 = Math.min(
-            derajatKeanggotaanECSedang,
-            derajatKeanggotaanTDSSedang,
-            derajatKeanggotaanSalinitasSedang,
-            derajatKeanggotaanPHSedang,
-            derajatKeanggotaanORPSedang,
-            derajatKeanggotaanSGBaik,
-            derajatKeanggotaanSuhuBaik
+        setAPredikat5(
+            Math.min(
+                derajatKeanggotaanECSedang,
+                derajatKeanggotaanTDSSedang,
+                derajatKeanggotaanSalinitasSedang,
+                derajatKeanggotaanPHSedang,
+                derajatKeanggotaanORPSedang,
+                derajatKeanggotaanSGBaik,
+                derajatKeanggotaanSuhuBaik
+            )
         );
         if (aPredikat5 == 0) {
             setZ5(80);
         } else {
-            setZ4(80 - aPredikat5 * (80 - 50));
+            setZ5(80 - aPredikat5 * (80 - 55));
         }
 
         // Rule 6: Kimia Buruk, Fisik Sedang
-        const aPredikat6 = Math.min(
-            derajatKeanggotaanECBuruk,
-            derajatKeanggotaanTDSBuruk,
-            derajatKeanggotaanSalinitasBuruk,
-            derajatKeanggotaanPHBuruk,
-            derajatKeanggotaanORPBuruk,
-            derajatKeanggotaanSGSedang,
-            derajatKeanggotaanSuhuSedang
+        setAPredikat6(
+            Math.min(
+                derajatKeanggotaanECBuruk,
+                derajatKeanggotaanTDSBuruk,
+                derajatKeanggotaanSalinitasBuruk,
+                derajatKeanggotaanPHBuruk,
+                derajatKeanggotaanORPBuruk,
+                derajatKeanggotaanSGSedang,
+                derajatKeanggotaanSuhuSedang
+            )
         );
         if (aPredikat6 == 0) {
             setZ6(30);
         } else {
-            setZ6(aPredikat6 * (50 - 30) + 30);
+            setZ6(aPredikat6 * (55 - 30) + 30);
         }
 
         // Rule 7: Kimia Sedang, Fisik Buruk
-        const aPredikat7 = Math.min(
-            derajatKeanggotaanECSedang,
-            derajatKeanggotaanTDSSedang,
-            derajatKeanggotaanSalinitasSedang,
-            derajatKeanggotaanPHSedang,
-            derajatKeanggotaanORPSedang,
-            derajatKeanggotaanSGBuruk,
-            derajatKeanggotaanSuhuBuruk
+        setAPredikat7(
+            Math.min(
+                derajatKeanggotaanECSedang,
+                derajatKeanggotaanTDSSedang,
+                derajatKeanggotaanSalinitasSedang,
+                derajatKeanggotaanPHSedang,
+                derajatKeanggotaanORPSedang,
+                derajatKeanggotaanSGBuruk,
+                derajatKeanggotaanSuhuBuruk
+            )
         );
         if (aPredikat7 == 0) {
             setZ7(30);
         } else {
-            setZ7(aPredikat7 * (50 - 30) + 30);
+            setZ7(aPredikat7 * (55 - 30) + 30);
         }
 
-        const zAkhir =
+        setZAkhir(
             (aPredikat1 * z1 +
-                aPredikat2 * z2a +
-                aPredikat2 * z2b +
+                aPredikat2 * z2A +
+                aPredikat2 * z2B +
                 aPredikat3 * z3 +
                 aPredikat4 * z4 +
                 aPredikat5 * z5 +
                 aPredikat6 * z6 +
                 aPredikat7 * z7) /
-            (aPredikat1 +
-                aPredikat2 +
-                aPredikat2 +
-                aPredikat3 +
-                aPredikat4 +
-                aPredikat5 +
-                aPredikat6 +
-                aPredikat7);
+                (aPredikat1 +
+                    aPredikat2 +
+                    aPredikat2 +
+                    aPredikat3 +
+                    aPredikat4 +
+                    aPredikat5 +
+                    aPredikat6 +
+                    aPredikat7)
+        );
 
         setData("kualitas", zAkhir);
     }, [
-        data.lokasi,
-        data.tautan,
         data.ec,
         data.tds,
         data.salinitas,
@@ -408,10 +434,45 @@ export default function Edit({ auth, river }) {
         data.orp,
         data.sg,
         data.suhu,
-        data.kualitas,
+        derajatKeanggotaanECBaik,
+        derajatKeanggotaanECSedang,
+        derajatKeanggotaanECBuruk,
+        derajatKeanggotaanTDSBaik,
+        derajatKeanggotaanTDSSedang,
+        derajatKeanggotaanTDSBuruk,
+        derajatKeanggotaanSalinitasBaik,
+        derajatKeanggotaanSalinitasSedang,
+        derajatKeanggotaanSalinitasBuruk,
+        derajatKeanggotaanPHBaik,
+        derajatKeanggotaanPHSedang,
+        derajatKeanggotaanPHBuruk,
+        derajatKeanggotaanORPBaik,
+        derajatKeanggotaanORPSedang,
+        derajatKeanggotaanORPBuruk,
+        derajatKeanggotaanSGBaik,
+        derajatKeanggotaanSGSedang,
+        derajatKeanggotaanSGBuruk,
+        derajatKeanggotaanSuhuBaik,
+        derajatKeanggotaanSuhuSedang,
+        derajatKeanggotaanSuhuBuruk,
+        aPredikat1,
+        aPredikat2,
+        aPredikat3,
+        aPredikat4,
+        aPredikat5,
+        aPredikat6,
+        aPredikat7,
+        z1,
+        z2A,
+        z2B,
+        z3,
+        z4,
+        z5,
+        z6,
+        z7,
+        zAkhir,
     ]);
-    console.log(river);
-    console.log(data);
+
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title={"Edit Parameter Air" + river.lokasi} />
@@ -548,6 +609,11 @@ export default function Edit({ auth, river }) {
                             onChange={(e) => setData("suhu", e.target.value)}
                         />
                         <InputError suhu={errors.suhu} className="mt-2" />
+                    </div>
+                    <div className="mt-5">
+                        <div className="font-bold text-red-500">
+                            Nilai Kualitas Air: {data.kualitas}
+                        </div>
                     </div>
                     <div className="flex space-x-8 items-center">
                         <PrimaryButton className="mt-5">Simpan</PrimaryButton>
