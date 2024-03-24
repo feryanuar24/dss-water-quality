@@ -100,19 +100,19 @@ export default function Edit({ auth, river }) {
             setDerajatKeanggotaanECBaik(1);
             setDerajatKeanggotaanECSedang(0);
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec > 200 && data.ec < 850) {
-            setDerajatKeanggotaanECBaik((850 - data.ec) / (850 - 200));
-            setDerajatKeanggotaanECSedang((data.ec - 200) / (850 - 200));
+        } else if (data.ec > 200 && data.ec < 600) {
+            setDerajatKeanggotaanECBaik((600 - data.ec) / (600 - 200));
+            setDerajatKeanggotaanECSedang((data.ec - 200) / (600 - 200));
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec == 850) {
+        } else if (data.ec == 600) {
             setDerajatKeanggotaanECBaik(0);
             setDerajatKeanggotaanECSedang(1);
             setDerajatKeanggotaanECBuruk(0);
-        } else if (data.ec > 850 && data.ec < 1500) {
+        } else if (data.ec > 600 && data.ec < 1000) {
             setDerajatKeanggotaanECBaik(0);
-            setDerajatKeanggotaanECSedang(1500 - data.ec) / (1500 - 850);
-            setDerajatKeanggotaanECBuruk(data.ec - 850) / (1500 - 850);
-        } else if (data.ec >= 1500) {
+            setDerajatKeanggotaanECSedang((1000 - data.ec) / (1000 - 600));
+            setDerajatKeanggotaanECBuruk((data.ec - 600) / (1000 - 600));
+        } else if (data.ec >= 1000) {
             setDerajatKeanggotaanECBaik(0);
             setDerajatKeanggotaanECSedang(0);
             setDerajatKeanggotaanECBuruk(1);
@@ -169,108 +169,100 @@ export default function Edit({ auth, river }) {
         }
 
         // pH
-        if (data.ph == 7) {
+        if (data.ph == 7.5) {
             setDerajatKeanggotaanPHBaik(1);
             setDerajatKeanggotaanPHSedang(0);
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 7 && data.ph < 7.5) {
-            setDerajatKeanggotaanPHBaik((7.5 - data.ph) / (7.5 - 7));
-            setDerajatKeanggotaanPHSedang((data.ph - 7) / (7.5 - 7));
+        } else if (data.ph > 7.5 && data.ph < 8.5) {
+            setDerajatKeanggotaanPHBaik((8.5 - data.ph) / (8.5 - 7.5));
+            setDerajatKeanggotaanPHSedang((data.ph - 7.5) / (8.5 - 7.5));
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 6.5 && data.ph < 7) {
-            setDerajatKeanggotaanPHBaik((6.5 - data.ph) / (6.5 - 7));
-            setDerajatKeanggotaanPHSedang((data.ph - 7) / (6.5 - 7));
+        } else if (data.ph > 6.5 && data.ph < 7.5) {
+            setDerajatKeanggotaanPHBaik((6.5 - data.ph) / (6.5 - 7.5));
+            setDerajatKeanggotaanPHSedang((data.ph - 7.5) / (6.5 - 7.5));
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph == 6.5 || data.ph == 7.5) {
+        } else if (data.ph == 6.5 || data.ph == 8.5) {
             setDerajatKeanggotaanPHBaik(0);
             setDerajatKeanggotaanPHSedang(1);
             setDerajatKeanggotaanPHBuruk(0);
-        } else if (data.ph > 7.5 && data.ph < 8) {
+        } else if (data.ph > 8.5 && data.ph < 9) {
             setDerajatKeanggotaanPHBaik(0);
-            setDerajatKeanggotaanPHSedang((8 - data.ph) / (8 - 7.5));
-            setDerajatKeanggotaanPHBuruk((data.ph - 7.5) / (8 - 7.5));
+            setDerajatKeanggotaanPHSedang((9 - data.ph) / (9 - 8.5));
+            setDerajatKeanggotaanPHBuruk((data.ph - 8.5) / (9 - 8.5));
         } else if (data.ph > 6 && data.ph < 6.5) {
             setDerajatKeanggotaanPHBaik(0);
             setDerajatKeanggotaanPHSedang((6 - data.ph) / (6 - 6.5));
             setDerajatKeanggotaanPHBuruk((data.ph - 6.5) / (6 - 6.5));
-        } else if (data.ph <= 6 || data.ph >= 8) {
+        } else if (data.ph <= 6 || data.ph >= 9) {
             setDerajatKeanggotaanPHBaik(0);
             setDerajatKeanggotaanPHSedang(0);
             setDerajatKeanggotaanPHBuruk(1);
         }
 
         // ORP (Oxidation Reduction Potential)
-        if (data.orp == 0) {
+        if (data.orp > 150) {
             setDerajatKeanggotaanORPBaik(1);
             setDerajatKeanggotaanORPSedang(0);
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp > 0 && data.orp < 50) {
-            setDerajatKeanggotaanORPBaik((50 - data.orp) / (50 - 0));
-            setDerajatKeanggotaanORPSedang((data.orp - 0) / (50 - 0));
+        } else if (data.orp > 25 && data.orp < 150) {
+            setDerajatKeanggotaanORPBaik((25 - data.orp) / (25 - 150));
+            setDerajatKeanggotaanORPSedang((data.orp - 150) / (25 - 150));
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp > -50 && data.orp < 0) {
-            setDerajatKeanggotaanORPBaik((data.orp - -50) / (0 - -50));
-            setDerajatKeanggotaanORPSedang((0 - data.orp) / (0 - -50));
-            setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp == -50 || data.orp == 50) {
+        } else if (data.orp == 25) {
             setDerajatKeanggotaanORPBaik(0);
             setDerajatKeanggotaanORPSedang(1);
             setDerajatKeanggotaanORPBuruk(0);
-        } else if (data.orp > 50 && data.orp < 100) {
+        } else if (data.orp > -100 && data.orp < 25) {
             setDerajatKeanggotaanORPBaik(0);
-            setDerajatKeanggotaanORPSedang((100 - data.orp) / (100 - 50));
-            setDerajatKeanggotaanORPBuruk((data.orp - 50) / (100 - 50));
-        } else if (data.orp > -100 && data.orp < -50) {
-            setDerajatKeanggotaanORPBaik(0);
-            setDerajatKeanggotaanORPSedang((data.orp - -100) / (-50 - -100));
-            setDerajatKeanggotaanORPBuruk((-50 - data.orp) / (-50 - -100));
-        } else if (data.orp <= -100 || data.orp >= 100) {
+            setDerajatKeanggotaanORPSedang((-100 - data.orp) / (-100 - 25));
+            setDerajatKeanggotaanORPBuruk((data.orp - 25) / (-100 - 25));
+        } else if (data.orp <= -100) {
             setDerajatKeanggotaanORPBaik(0);
             setDerajatKeanggotaanORPSedang(0);
             setDerajatKeanggotaanORPBuruk(1);
         }
 
         // SG (Specific Gravity)
-        if (data.sg <= 1020) {
+        if (data.sg <= 1005) {
             setDerajatKeanggotaanSGBaik(1);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1020 && data.sg < 1023) {
-            setDerajatKeanggotaanSGBaik((1023 - data.sg) / (1023 - 1020));
-            setDerajatKeanggotaanSGSedang((data.sg - 1020) / (1023 - 1020));
+        } else if (data.sg > 1005 && data.sg < 1010) {
+            setDerajatKeanggotaanSGBaik((1010 - data.sg) / (1010 - 1005));
+            setDerajatKeanggotaanSGSedang((data.sg - 1005) / (1010 - 1005));
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg == 1023) {
+        } else if (data.sg == 1010) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(1);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1023 && data.sg < 1025) {
+        } else if (data.sg > 1010 && data.sg < 1015) {
             setDerajatKeanggotaanSGBaik(0);
-            setDerajatKeanggotaanSGSedang((1025 - data.sg) / (1025 - 1023));
-            setDerajatKeanggotaanSGBuruk((data.sg - 1023) / (1025 - 1023));
-        } else if (data.sg >= 1025) {
+            setDerajatKeanggotaanSGSedang((1015 - data.sg) / (1015 - 1010));
+            setDerajatKeanggotaanSGBuruk((data.sg - 1010) / (1015 - 1010));
+        } else if (data.sg >= 1015) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(1);
         }
 
         // Suhu
-        if (data.suhu <= 23) {
+        if (data.suhu <= 30) {
             setDerajatKeanggotaanSuhuBaik(1);
             setDerajatKeanggotaanSuhuSedang(0);
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu > 23 && data.suhu < 27) {
-            setDerajatKeanggotaanSuhuBaik((27 - data.suhu) / (27 - 23));
-            setDerajatKeanggotaanSuhuSedang((data.suhu - 23) / (27 - 23));
+        } else if (data.suhu > 30 && data.suhu < 32) {
+            setDerajatKeanggotaanSuhuBaik((32 - data.suhu) / (32 - 30));
+            setDerajatKeanggotaanSuhuSedang((data.suhu - 30) / (32 - 30));
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu == 27) {
+        } else if (data.suhu == 32) {
             setDerajatKeanggotaanSuhuBaik(0);
             setDerajatKeanggotaanSuhuSedang(1);
             setDerajatKeanggotaanSuhuBuruk(0);
-        } else if (data.suhu > 27 && data.suhu < 31) {
+        } else if (data.suhu > 32 && data.suhu < 34) {
             setDerajatKeanggotaanSuhuBaik(0);
-            setDerajatKeanggotaanSuhuSedang((31 - data.suhu) / (31 - 27));
-            setDerajatKeanggotaanSuhuBuruk((data.suhu - 27) / (31 - 27));
-        } else if (data.suhu >= 31) {
+            setDerajatKeanggotaanSuhuSedang((34 - data.suhu) / (34 - 32));
+            setDerajatKeanggotaanSuhuBuruk((data.suhu - 32) / (34 - 32));
+        } else if (data.suhu >= 34) {
             setDerajatKeanggotaanSuhuBaik(0);
             setDerajatKeanggotaanSuhuSedang(0);
             setDerajatKeanggotaanSuhuBuruk(1);

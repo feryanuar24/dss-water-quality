@@ -128,7 +128,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     )}
                 </div>
 
-                {/* Image Section */}
+                {/* Technology Section */}
                 <div className="w-full pb-20">
                     <div>
                         <div className="w-full relative bg-blue-200 h-80">
@@ -239,7 +239,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                 </div>
 
-                {/* I Do Section */}
+                {/* Development Stage Section */}
                 <div className="relative">
                     <div>
                         <svg

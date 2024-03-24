@@ -7,7 +7,7 @@ export default function Dashboard({ auth, rivers }) {
     console.log(rivers);
 
     const dataFuzzyEC = {
-        labels: ["0", "200", "850", "1500", "1700"],
+        labels: ["0", "200", "600", "1000", "1200"],
         datasets: [
             {
                 label: "EC Baik",
@@ -53,24 +53,24 @@ export default function Dashboard({ auth, rivers }) {
         datasets: [
             {
                 label: "Sal. Baik",
-                data: [0, 0, 0, 1, 0, 0, 0],
+                data: [1, 1, 0, 0, 0],
                 borderColor: "green",
             },
             {
                 label: "Sal. Sedang",
-                data: [0, 0, 1, 0, 1, 0, 0],
+                data: [0, 0, 1, 0, 0],
                 borderColor: "orange",
             },
             {
                 label: "Sal. Buruk",
-                data: [1, 1, 0, 0, 0, 1, 1],
+                data: [0, 0, 0, 1, 1],
                 borderColor: "red",
             },
         ],
     };
 
     const dataFuzzypH = {
-        labels: ["5,5", "6", "6,5", "7", "7,5", "8", "8,5"],
+        labels: ["0", "6", "6,5", "7,5", "8,5", "9", "14"],
         datasets: [
             {
                 label: "pH Baik",
@@ -91,28 +91,28 @@ export default function Dashboard({ auth, rivers }) {
     };
 
     const dataFuzzyORP = {
-        labels: ["-150", "-100", "-50", "0", "50", "100", "150"],
+        labels: ["-125", "-100", "25", "150", "175"],
         datasets: [
             {
                 label: "ORP Baik",
-                data: [0, 0, 0, 1, 0, 0, 0],
+                data: [0, 0, 0, 1, 1],
                 borderColor: "green",
             },
             {
                 label: "ORP Sedang",
-                data: [0, 0, 1, 0, 1, 0, 0],
+                data: [0, 0, 1, 0, 0],
                 borderColor: "orange",
             },
             {
                 label: "ORP Buruk",
-                data: [1, 1, 0, 0, 0, 1, 1],
+                data: [1, 1, 0, 0, 0],
                 borderColor: "red",
             },
         ],
     };
 
     const dataFuzzySG = {
-        labels: ["1017", "1020", "1023", "1025", "1028"],
+        labels: ["1000", "1005", "1010", "1005", "1020"],
         datasets: [
             {
                 label: "SG Baik",
@@ -133,7 +133,7 @@ export default function Dashboard({ auth, rivers }) {
     };
 
     const dataFuzzySuhu = {
-        labels: ["19", "23", "27", "31", "35"],
+        labels: ["0", "30", "32", "34", "100"],
         datasets: [
             {
                 label: "Suhu Baik",
