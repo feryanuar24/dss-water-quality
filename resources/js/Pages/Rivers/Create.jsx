@@ -202,7 +202,7 @@ export default function Create({ auth }) {
         }
 
         // ORP (Oxidation Reduction Potential)
-        if (data.orp > 150) {
+        if (data.orp >= 150) {
             setDerajatKeanggotaanORPBaik(1);
             setDerajatKeanggotaanORPSedang(0);
             setDerajatKeanggotaanORPBuruk(0);
@@ -229,19 +229,19 @@ export default function Create({ auth }) {
             setDerajatKeanggotaanSGBaik(1);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1005 && data.sg < 1010) {
-            setDerajatKeanggotaanSGBaik((1010 - data.sg) / (1010 - 1005));
-            setDerajatKeanggotaanSGSedang((data.sg - 1005) / (1010 - 1005));
+        } else if (data.sg > 1005 && data.sg < 1007) {
+            setDerajatKeanggotaanSGBaik((1007 - data.sg) / (1007 - 1005));
+            setDerajatKeanggotaanSGSedang((data.sg - 1005) / (1007 - 1005));
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg == 1010) {
+        } else if (data.sg == 1007) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(1);
             setDerajatKeanggotaanSGBuruk(0);
-        } else if (data.sg > 1010 && data.sg < 1015) {
+        } else if (data.sg > 1007 && data.sg < 1009) {
             setDerajatKeanggotaanSGBaik(0);
-            setDerajatKeanggotaanSGSedang((1015 - data.sg) / (1015 - 1010));
-            setDerajatKeanggotaanSGBuruk((data.sg - 1010) / (1015 - 1010));
-        } else if (data.sg >= 1015) {
+            setDerajatKeanggotaanSGSedang((1009 - data.sg) / (1009 - 1007));
+            setDerajatKeanggotaanSGBuruk((data.sg - 1007) / (1009 - 1007));
+        } else if (data.sg >= 1009) {
             setDerajatKeanggotaanSGBaik(0);
             setDerajatKeanggotaanSGSedang(0);
             setDerajatKeanggotaanSGBuruk(1);
@@ -341,9 +341,9 @@ export default function Create({ auth }) {
             )
         );
         if (aPredikat4 == 0) {
-            setZ4(80);
+            setZ4(55);
         } else {
-            setZ4(80 - aPredikat4 * (80 - 55));
+            setZ4(aPredikat4 * (80 - 55) + 55);
         }
 
         // Rule 5: Kimia Sedang, Fisik Baik
@@ -359,9 +359,9 @@ export default function Create({ auth }) {
             )
         );
         if (aPredikat5 == 0) {
-            setZ5(80);
+            setZ5(55);
         } else {
-            setZ5(80 - aPredikat5 * (80 - 55));
+            setZ5(aPredikat5 * (80 - 55) + 55);
         }
 
         // Rule 6: Kimia Buruk, Fisik Sedang
@@ -377,9 +377,9 @@ export default function Create({ auth }) {
             )
         );
         if (aPredikat6 == 0) {
-            setZ6(30);
+            setZ6(55);
         } else {
-            setZ6(aPredikat6 * (55 - 30) + 30);
+            setZ6(55 - aPredikat6 * (55 - 30));
         }
 
         // Rule 7: Kimia Sedang, Fisik Buruk
@@ -395,9 +395,9 @@ export default function Create({ auth }) {
             )
         );
         if (aPredikat7 == 0) {
-            setZ7(30);
+            setZ7(55);
         } else {
-            setZ7(aPredikat7 * (55 - 30) + 30);
+            setZ7(55 - aPredikat7 * (55 - 30));
         }
 
         setZAkhir(

@@ -4,8 +4,6 @@ import Chart from "chart.js/auto";
 import { useEffect, useRef } from "react";
 
 export default function Dashboard({ auth, rivers }) {
-    console.log(rivers);
-
     const dataFuzzyEC = {
         labels: ["0", "200", "600", "1000", "1200"],
         datasets: [
@@ -373,8 +371,6 @@ export default function Dashboard({ auth, rivers }) {
         ).toFixed(2),
     };
 
-    console.log(nilaiAvg);
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -426,39 +422,40 @@ export default function Dashboard({ auth, rivers }) {
                                                 Kualitas Air Baik
                                             </li>
                                             <li>
-                                                Jika EC Baik, TDS Baik,
-                                                Salinitas Baik, pH Baik, ORP
-                                                Baik, SG Sedang, Suhu Sedang;
-                                                Maka Kualitas Air Sedang
-                                            </li>
-                                            <li>
-                                                Jika EC Sedang, TDS Sedang,
-                                                Salinitas Sedang, pH Sedang, ORP
-                                                Sedang, SG Baik, Suhu Baik; Maka
-                                                Kualitas Air Sedang
-                                            </li>
-                                            <li>
                                                 Jika EC Sedang, TDS Sedang,
                                                 Salinitas Sedang, pH Sedang, ORP
                                                 Sedang, SG Sedang, Suhu Sedang;
                                                 Maka Kualitas Air Sedang
                                             </li>
                                             <li>
+                                                Jika EC Buruk, TDS Buruk,
+                                                Salinitas Buruk, pH Buruk, ORP
+                                                Buruk, SG Buruk, Suhu Buruk;
+                                                Maka Kualitas Air Buruk
+                                            </li>
+                                            <li>
+                                                Jika EC Baik, TDS Baik,
+                                                Salinitas Baik, pH Baik, ORP
+                                                Baik, SG Sedang, Suhu Sedang;
+                                                Maka Kualitas Air Baik
+                                            </li>
+                                            <li>
+                                                Jika EC Sedang, TDS Sedang,
+                                                Salinitas Sedang, pH Sedang, ORP
+                                                Sedang, SG Baik, Suhu Baik; Maka
+                                                Kualitas Air Baik
+                                            </li>
+
+                                            <li>
                                                 Jika EC Sedang, TDS Sedang,
                                                 Salinitas Sedang, pH Sedang, ORP
                                                 Sedang, SG Buruk, Suhu Buruk;
-                                                Maka Kualitas Air Sedang
+                                                Maka Kualitas Air Buruk
                                             </li>
                                             <li>
                                                 Jika EC Buruk, TDS Buruk,
                                                 Salinitas Buruk, pH Buruk, ORP
                                                 Buruk, SG Sedang, Suhu Sedang;
-                                                Maka Kualitas Air Sedang
-                                            </li>
-                                            <li>
-                                                Jika EC Buruk, TDS Buruk,
-                                                Salinitas Buruk, pH Buruk, ORP
-                                                Buruk, SG Buruk, Suhu Buruk;
                                                 Maka Kualitas Air Buruk
                                             </li>
                                         </ol>
