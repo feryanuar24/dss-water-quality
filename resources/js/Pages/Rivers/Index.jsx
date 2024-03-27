@@ -74,8 +74,49 @@ export default function Index({ auth, rivers }) {
                                         <td className="text-center px-6 py-3">
                                             {river.suhu}
                                         </td>
-                                        <td className="text-center px-6 py-3">
-                                            {river.kualitas}
+                                        <td className="relative group">
+                                            <div
+                                                className={`text-center px-6 py-3 hover:cursor-pointer ${
+                                                    river.kualitas == 30
+                                                        ? "text-red-500"
+                                                        : river.kualitas > 30 &&
+                                                          river.kualitas < 55
+                                                        ? "text-orange-500"
+                                                        : river.kualitas == 55
+                                                        ? "text-yellow-500"
+                                                        : river.kualitas > 55 &&
+                                                          river.kualitas < 80
+                                                        ? "text-lime-500"
+                                                        : river.kualitas == 80
+                                                        ? "text-green-500"
+                                                        : null
+                                                }`}
+                                            >
+                                                {river.kualitas}
+                                            </div>
+                                            {river.kualitas == 30 ? (
+                                                <div className="hidden group-hover:block absolute w-max -top-5 bg-gray-100 px-3 py-1 rounded-lg">
+                                                    Kualitas Air Buruk
+                                                </div>
+                                            ) : river.kualitas > 30 &&
+                                              river.kualitas < 55 ? (
+                                                <div className="hidden group-hover:block absolute w-max -top-5 bg-gray-100 px-3 py-1 rounded-lg">
+                                                    Kualitas Air Kurang Baik
+                                                </div>
+                                            ) : river.kualitas == 55 ? (
+                                                <div className="hidden group-hover:block absolute w-max -top-5 bg-gray-100 px-3 py-1 rounded-lg">
+                                                    Kualitas Air Sedang
+                                                </div>
+                                            ) : river.kualitas > 55 &&
+                                              river.kualitas < 80 ? (
+                                                <div className="hidden group-hover:block absolute w-max -top-5 bg-gray-100 px-3 py-1 rounded-lg">
+                                                    Kualitas Air Baik
+                                                </div>
+                                            ) : river.kualitas == 80 ? (
+                                                <div className="hidden group-hover:block absolute w-max -top-5 bg-gray-100 px-3 py-1 rounded-lg">
+                                                    Kualitas Air Sangat Baik
+                                                </div>
+                                            ) : null}
                                         </td>
                                         {river.user.id == auth.user.id && (
                                             <td className="flex justify-between space-x-5 px-6 py-3">

@@ -605,7 +605,19 @@ export default function Create({ auth }) {
 
                     <div className="mt-5">
                         <div className="font-bold text-red-500">
-                            Nilai Kualitas Air: {data.kualitas}
+                            Nilai kualitas air adalah {data.kualitas},
+                            menunjukkan bahwa kualitas air di lokasi tersebut{" "}
+                            {data.kualitas == 30
+                                ? "buruk"
+                                : data.kualitas > 30 && data.kualitas < 55
+                                ? "kurang baik"
+                                : data.kualitas == 55
+                                ? "sedang"
+                                : data.kualitas > 55 && data.kualitas < 80
+                                ? "baik"
+                                : data.kualitas == 80
+                                ? "sangat baik"
+                                : ""}
                         </div>
                     </div>
 
