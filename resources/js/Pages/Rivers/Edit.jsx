@@ -162,8 +162,12 @@ export default function Edit({ auth, river }) {
             setDerajatKeanggotaanSalinitasBuruk(0);
         } else if (data.salinitas > 0.75 && data.salinitas < 1) {
             setDerajatKeanggotaanSalinitasBaik(0);
-            setDerajatKeanggotaanECSedang((1 - data.salinitas) / (1 - 0.75));
-            setDerajatKeanggotaanECBuruk((data.salinitas - 0.75) / (1 - 0.75));
+            setDerajatKeanggotaanSalinitasSedang(
+                (1 - data.salinitas) / (1 - 0.75)
+            );
+            setDerajatKeanggotaanSalinitasBuruk(
+                (data.salinitas - 0.75) / (1 - 0.75)
+            );
         } else if (data.salinitas >= 1) {
             setDerajatKeanggotaanSalinitasBaik(0);
             setDerajatKeanggotaanSalinitasSedang(0);
