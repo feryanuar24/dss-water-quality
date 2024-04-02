@@ -92,6 +92,8 @@ export default function Edit({ auth, river }) {
     const [z6, setZ6] = useState();
     const [z7, setZ7] = useState();
 
+    const [zAkhir, setZAkhir] = useState();
+
     useEffect(() => {
         // Fuzzifikasi
 

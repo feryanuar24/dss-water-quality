@@ -22,7 +22,7 @@ export default function Index({ auth, rivers }) {
                 </div>
 
                 <div>
-                    <table className="table-auto w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+                    <table className="table-auto w-full divide-y divide-gray-200 rounded-lg overflow-hidden text-sm">
                         <thead className="bg-gray-50">
                             <tr>
                                 <th className="px-6 py-3">Lokasi</th>
@@ -40,12 +40,10 @@ export default function Index({ auth, rivers }) {
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {rivers
-                                .sort((a, b) =>
-                                    a.lokasi.localeCompare(b.lokasi)
-                                )
+                                .sort((a, b) => b.kualitas - a.kualitas)
                                 .map((river) => (
                                     <tr key={river.id}>
-                                        <td className="px-6 py-3">
+                                        <td className="px-6 line-clamp-2">
                                             {river.lokasi}
                                         </td>
                                         <td className="px-6 py-3 text-blue-500 underline hover:text-gray-500">
@@ -63,7 +61,7 @@ export default function Index({ auth, rivers }) {
                                             {river.salinitas}
                                         </td>
                                         <td className="text-center px-6 py-3">
-                                            {river.ph}
+                                            {Math.round(river.ph * 100) / 100}
                                         </td>
                                         <td className="text-center px-6 py-3">
                                             {river.orp}
