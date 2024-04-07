@@ -116,7 +116,7 @@ export default function Index({ auth, rivers }) {
                                                 </div>
                                             ) : null}
                                         </td>
-                                        {river.user.id == auth.user.id && (
+                                        {river.user.id == auth.user.id ? (
                                             <td className="flex justify-between space-x-5 px-6 py-3">
                                                 <Link
                                                     href={route("rivers.edit", {
@@ -141,6 +141,10 @@ export default function Index({ auth, rivers }) {
                                                         className="hover:text-red-500 cursor-pointer"
                                                     />
                                                 </Link>
+                                            </td>
+                                        ) : (
+                                            <td className="text-red-500 font-bold text-center">
+                                                X
                                             </td>
                                         )}
                                     </tr>
