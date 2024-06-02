@@ -110,7 +110,7 @@ export default function Dashboard({ auth, rivers }) {
     };
 
     const dataFuzzySG = {
-        labels: ["1000", "1005", "1010", "1005", "1020"],
+        labels: ["1000", "1005", "1007", "1010", "1015"],
         datasets: [
             {
                 label: "SG Baik",
