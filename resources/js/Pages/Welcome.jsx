@@ -6,6 +6,7 @@ import {
     faCode,
     faVial,
     faMessage,
+    faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
@@ -100,8 +101,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                     <div className="font-medium text-gray-500 text-lg w-1/3 text-center">
                         Sistem Pendukung Keputusan (SPK) ini membantu Anda
-                        menentukan kualitas air sungai dengan mudah dan akurat
-                        menggunakan metode Fuzzy Tsukamoto.
+                        menentukan nilai kualitas air sungai dengan mudah dan
+                        akurat menggunakan metode Fuzzy Tsukamoto.
                     </div>
                     {auth.user ? (
                         <Link
@@ -188,7 +189,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div>
                         <div className="font-medium text-lg text-gray-500 px-40">
                             Mendukung input data, analisis data Fuzzy Tsukamoto,
-                            dan menghasilkan informasi kualitas air.
+                            dan menghasilkan data kualitas air.
                         </div>
                     </div>
                     <div className="flex space-x-5 items-center">
@@ -198,17 +199,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 Dashboard
                             </div>
                             <div className="text-5xl font-black text-gray-800">
-                                Visualisasi Data Air Sungai dengan Fuzzy
-                                Tsukamoto
+                                Optimalkan Data Kualitas Air dengan Logika Fuzzy
                             </div>
                             <div className="text-lg font-medium text-gray-500">
-                                Fitur-fitur penting seperti grafik fungsi
-                                keagotaan fuzzy, aturan fuzzy, dan visualisasi
-                                data memungkinkan Anda untuk memahami dan
-                                menganalisis data secara mendalam.
+                                Dapatkan informasi tentang penggunaan logika
+                                fuzzy untuk menentukan kualitas air, amati
+                                hubungan variabel input-output melalui grafik
+                                plot, dan akses tabel nilai rata-rata untuk
+                                gambaran kondisi air terkini.
                             </div>
                         </div>
-                        <div className="w-[1200px]">
+                        <div className="w-[1500px]">
                             <img
                                 src="/assets/image/dashboard.png"
                                 alt="Tampilan Halaman Dahboard"
@@ -216,7 +217,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div>
                     </div>
                     <div className="flex space-x-5 items-center">
-                        <div className="w-[1200px]">
+                        <div className="w-[1500px]">
                             <img
                                 src="/assets/image/manajemen-data.png"
                                 alt="Tampilan Halaman Manajemen Data"
@@ -228,12 +229,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 Manajemen Data
                             </div>
                             <div className="text-5xl font-black text-gray-800">
-                                Pengambilan Keputusan Berbasis Data
+                                Manajemen Data Air Sungai yang Mudah dan Efisien
                             </div>
                             <div className="text-lg font-medium text-gray-500">
-                                Masukkan data, dan biarkan sistem kami
-                                menganalisisnya untuk membantu Anda mengambil
-                                keputusan yang lebih terarah.
+                                Kelola data kualitas air dengan mudah melalui
+                                halaman manajemen kami yang intuitif. Akses
+                                tabel dengan 7 parameter air, kualitas air, dan
+                                tombol untuk membuat, mengedit, serta menghapus
+                                data dengan cepat. Atur data Anda dengan sistem
+                                yang dirancang untuk kenyamanan Anda.
                             </div>
                         </div>
                     </div>
@@ -262,9 +266,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                             </div>
                             <div className="font-medium text-lg text-gray-500 pt-20">
-                                Sistem ini menggunakan metode Fuzzy Tsukamoto
-                                dan dikembangkan dengan model Waterfall untuk
-                                menghasilkan prediksi yang akurat.
+                                Sistem yang dikembangkan adalah Sistem Pendukung
+                                Keputusan untuk menilai kualitas air sungai
+                                dengan Fuzzy Tsukamoto. Pengembangan sistem ini
+                                mengikuti pendekatan SDLC Waterfall yang
+                                terstruktur dan terdokumentasi.
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-10">
@@ -280,9 +286,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         Analisis
                                     </div>
                                     <div className="font-medium text-base text-gray-500">
-                                        Saya mengidentifikasi 7 parameter air
-                                        melalui studi literatur dan pengambilan
-                                        sampel air sungai di Karawang.
+                                        Pengembang menganalisis data parameter
+                                        air untuk kemudian merumuskan logika
+                                        fuzzy dalam sistem.
                                     </div>
                                 </div>
                             </div>
@@ -298,10 +304,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         Desain
                                     </div>
                                     <div className="font-medium text-base text-gray-500">
-                                        Saya merancang fitur dan tampilan, serta
-                                        mengembangkan komponen SPK untuk
-                                        membantu pengambilan keputusan terkait
-                                        kualitas air sungai.
+                                        Pengembang merancang arsitektur sistem
+                                        dan merencanakan fitur yang akan
+                                        dikembangkan.
                                     </div>
                                 </div>
                             </div>
@@ -317,9 +322,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         Implementasi
                                     </div>
                                     <div className="font-medium text-base text-gray-500">
-                                        Saya menerjemahkan desain UI/UX menjadi
-                                        source code dan mengintegrasikan
-                                        analisis data ke dalam model SPK.
+                                        Pengembang menentukan teknologi yang
+                                        digunakan untuk mengimplementasikan
+                                        desain arsitektur, dimulai dari proses
+                                        untuk mencapai sistem yang berjalan
+                                        dengan baik.
                                     </div>
                                 </div>
                             </div>
@@ -335,11 +342,33 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         Testing
                                     </div>
                                     <div className="font-medium text-base text-gray-500">
-                                        Saya melakukan pengujian fungsional dan
-                                        non-fungsional pada sistem yang
-                                        diimplementasikan dengan data
-                                        sesungguhnya dan mendapatkan hasil
-                                        memuaskan.
+                                        Pengembang melakukan pengujian manual
+                                        fungsional terhadap fitur yang berhasil
+                                        diimplementasikan, serta melakukan
+                                        pengujian akurasi terhadap model Fuzzy
+                                        Tsukamoto yang telah dikembangkan.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-span-2">
+                                <div className="flex space-x-5 border rounded-lg p-5 bg-white mx-60">
+                                    <div>
+                                        <FontAwesomeIcon
+                                            icon={faScrewdriverWrench}
+                                            className="text-blue-200 fa-2x"
+                                        />
+                                    </div>
+                                    <div className="space-y-5">
+                                        <div className="font-black text-3xl text-gray-800">
+                                            Pemeliharaann
+                                        </div>
+                                        <div className="font-medium text-base text-gray-500">
+                                            Pengembang membuat dokumentasi
+                                            terkait penggunaan kode sumber dan
+                                            menyimpan kode sumber serta basis
+                                            data untuk keamanan dan pengembangan
+                                            selanjutnya.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +377,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 {/* Tutorial Section */}
-                <div className="pt-[500px] relative">
+                <div className="pt-[800px] relative">
                     <div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -428,46 +457,36 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <div className="h-80 border-2 rounded-b-lg p-5 text-lg text-gray-500 font-medium">
                             {view === "teoritis" ? (
                                 <div>
-                                    <ul className="list-disc list-inside">
+                                    <ul className="list-decimal list-outside px-5">
                                         <li>
-                                            Berperan dalam meningkatkan
-                                            pengetahuan dan pemahaman mengenai
-                                            penerapan metode fuzzy Tsukamoto
-                                            dalam Sistem Pendukung Keputusan
-                                            (SPK) untuk mengevaluasi kualitas
-                                            air sungai khususnya untuk daerah
-                                            Karawang.
+                                            Memperluas pemahaman tentang
+                                            pengembangan Sistem Pendukung
+                                            Keputusan (SPK) berbasis web
+                                            menggunakan pendekatan SDLC
+                                            Waterfall dalam konteks menentukan
+                                            nilai kualitas air sungai.
+                                        </li>
+                                        <li>
+                                            Menambah pengetahuan tentang
+                                            penerapan metode Fuzzy Tsukamoto
+                                            untuk menentukan nilai kualitas air
+                                            sungai berdasarkan beberapa
+                                            parameter air.
                                         </li>
                                     </ul>
                                 </div>
                             ) : (
-                                <ol className="list-disc list-inside space-y-3">
+                                <ol className="list-decimal list-outside px-5">
                                     <li>
-                                        Membantu pembangunan Sistem Pendukung
-                                        Keputusan (SPK) yang efisien untuk
-                                        pemantauan kualitas air sungai, sehingga
-                                        menjadi alat berharga bagi pengelola
-                                        lingkungan.
+                                        Memberikan gambaran umum atau pemahaman
+                                        awal tentang kondisi kualitas air sungai
+                                        pada suatu waktu tertentu.
                                     </li>
                                     <li>
-                                        Menjadi dasar untuk pengelolaan sumber
-                                        daya air yang lebih optimal di wilayah
-                                        Karawang dengan memanfaatkan teknologi
-                                        dan kecerdasan buatan.
-                                    </li>
-                                    <li>
-                                        Berpotensi mengurangi risiko kesehatan
-                                        masyarakat dan dampak negatif lingkungan
-                                        melalui pemantauan dan manajemen yang
-                                        lebih efektif terhadap kualitas air
-                                        sungai.
-                                    </li>
-                                    <li>
-                                        Menyediakan informasi akurat dan cepat
-                                        kepada pihak terkait, seperti
-                                        pemerintah, peneliti, dan masyarakat,
-                                        untuk pengambilan keputusan yang lebih
-                                        tepat terkait kualitas air sungai.
+                                        Menjadi indikator cepat untuk menentukan
+                                        apakah perlu dilakukan tindakan lebih
+                                        lanjut atau investigasi lebih mendalam
+                                        terkait kualitas air sungai.
                                     </li>
                                 </ol>
                             )}
